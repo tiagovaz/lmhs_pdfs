@@ -1,0 +1,22 @@
+{% load render_table from django_tables2 %}
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static "django_tables2/themes/paleblue/css/screen.css" %}" />
+            <script type="text/javascript">
+            // Popup window code
+            function newPopup(url) {
+                popupWindow = window.open(
+                    url,'popUpWindow','height=600,width=800,left=500,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+            }
+            </script>
+
+    </head>
+    <body>
+    <center>
+        {% render_table table %}
+    </center>
+    </body>
+</html>
