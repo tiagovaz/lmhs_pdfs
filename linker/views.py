@@ -24,15 +24,16 @@ def list(request):
     # Handle file upload
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
-        print request.POST.get('id')
         if form.is_valid():
             newdoc = PDF.objects.get(pk=request.POST.get('id'))
             newdoc.docfile = request.FILES['docfile']
             newdoc.found = '1'
+            newdoc.docfile.name = request.POST.get('pdf_name')
             newdoc.save()
 
             # Redirect to the document list after POST
-            return HttpResponseRedirect(reverse('linker.views.list'))
+            #return HttpResponseRedirect(reverse('linker.views.list'))
+            return render_to_response('merci.html')
     else:
         notice = request.GET['notice']
         data = PDF.objects.filter(notice__iexact=notice)
