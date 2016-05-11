@@ -13,11 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import RedirectView
+
 from django.contrib import admin
-from linker.views import List
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^list/', List.as_view()),
-]
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^linker/',include('linker.urls')),
+    url(r'^$', RedirectView.as_view(url='/linker/list/', permanent=True)),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

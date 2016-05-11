@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 from django.utils.encoding import python_2_unicode_compatible
-
 from django.db import models
 
 @python_2_unicode_compatible
@@ -17,3 +16,6 @@ class PDF(models.Model):
         verbose_name = "PDF"
         verbose_name_plural = "PDFs"
 #        db_table = 'PDF'
+
+class Document(models.Model):
+    docfile = models.FileField(upload_to='documents/%Y/%m/%d')

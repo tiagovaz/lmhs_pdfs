@@ -1,25 +1,36 @@
-{% load render_table from django_tables2 %}
-{% load staticfiles %}
-
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="{% static "django_tables2/themes/paleblue/css/screen.css" %}" />
-            <script type="text/javascript">
-            // Popup window code
-            function newPopup(url) {
-                popupWindow = window.open(
-                    url,'popUpWindow','height=600,width=800,left=500,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
-            }
-            </script>
-
+        <meta charset="utf-8">
+        <title>Minimal Django File Upload Example</title>
     </head>
-    <body>
-    <center>
-        TOTAL: {{ other_data }}
-        <p>
 
-        {% render_table table %}
-    </center>
+    <body>
+        <!-- List of uploaded documents -->
+        {% if documents %}
+            <ul>
+                {% for document in documents %}
+                    <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No documents.</p>
+        {% endif %}
+
+        <!-- Upload form. Note enctype attribute! -->
+        <form action="{% url "list" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+
+            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+
+            <p>
+                {{ form.docfile.errors }}
+                {{ form.docfile }}
+            </p>
+
+            <p><input type="submit" value="Upload"/></p>
+        </form>
     </body>
+
 </html>
