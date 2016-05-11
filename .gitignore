@@ -64,3 +64,5 @@ main/migrations/*
 .project
 /.pydevproject
 /.settings/
+
+lmhs_pdfs/settings.py
