@@ -8,14 +8,15 @@ class PDF(models.Model):
     pdf_name = models.CharField("Nom du Fichier PDF", max_length=150)
     found = models.CharField("Disponible", max_length=150)
     last_check = models.CharField("Date de verification", max_length=150)
+    docfile = models.FileField(upload_to='documents/%Y/%m/%d', null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.notice
 
     class Meta:
         verbose_name = "PDF"
         verbose_name_plural = "PDFs"
 #        db_table = 'PDF'
 
-class Document(models.Model):
-    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+#class Document(models.Model):
+#    docfile = models.FileField(upload_to='documents/%Y/%m/%d')

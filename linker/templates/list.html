@@ -6,17 +6,6 @@
     </head>
 
     <body>
-        <!-- List of uploaded documents -->
-        {% if documents %}
-            <ul>
-                {% for document in documents %}
-                    <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No documents.</p>
-        {% endif %}
-
         <!-- Upload form. Note enctype attribute! -->
         <form action="{% url "list" %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -28,6 +17,15 @@
                 {{ form.docfile.errors }}
                 {{ form.docfile }}
             </p>
+
+            {% for r in records %}
+
+            <input type='hidden' name="id" value="{{ r.id }}" />
+            <input type='hidden' name="notice" value="{{ r.notice }}" />
+            <input type='hidden' name="pdf_name" value="{{ r.pdf_name }}" />
+            <input type='hidden' name="found" value="{{ r.found }}" />
+
+            {% endfor %}
 
             <p><input type="submit" value="Upload"/></p>
         </form>
