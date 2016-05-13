@@ -12,5 +12,5 @@ class PDFTable(tables.Table):
 
     class Meta:
         model = PDF
-        fields = ('id', 'notice', 'pdf_filename', 'last_check', 'fix')
+        fields = ('id', 'notice', 'projet', 'pdf_filename', 'last_check', 'fix')
         attrs = {"class": "paleblue"}

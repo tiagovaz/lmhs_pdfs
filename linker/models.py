@@ -5,6 +5,7 @@ from django.db import models
 @python_2_unicode_compatible
 class PDF(models.Model):
     notice = models.CharField("Notice", max_length=150)
+    projet = models.CharField("Projet", blank=True, null=True, max_length=200)
     pdf_name = models.CharField("Nom du Fichier PDF", max_length=150)
     found = models.CharField("Disponible", max_length=150)
     last_check = models.CharField("Date de verification", max_length=150)
